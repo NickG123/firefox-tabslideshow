@@ -20,6 +20,7 @@ var tabslideshow = {
     timer: null,
     ignorehidden: true,
     randomorder: false,
+    customtimes: [],
 
     // initialize the extension
     startup: function()
@@ -38,6 +39,10 @@ var tabslideshow = {
         this.refresh = this.prefs.getBoolPref('refresh');
         this.ignorehidden = this.prefs.getBoolPref('ignorehidden');
         this.randomorder = this.prefs.getBoolPref('randomorder');
+        
+        // create custom time dictionary
+        var customtimesstring = this.prefs.getCharPref('customtimes');
+        this.computeCustomTimes(customtimesstring);
 
         // add tab context menu entries and hook
         var tabmenu = tabslideshow_gettabcontextmenu();
@@ -76,6 +81,17 @@ var tabslideshow = {
             this.toggle();
         }
     },
+    
+    computeCustomTimes: function(str) {
+        var items = str.split("\n");
+        for (var i = 0; i < items.length; i++) {
+            var elems = items[i].split(" ");
+            var reg = new RegExp(elems[0]);
+            var time = parseInt(elems[1]);
+            this.customtimes.push([reg, time]);
+            console.log(this.customtimes[i]);
+        }
+    },
 
     // handler for prefs change
     observe: function(subject, topic, data)
@@ -99,6 +115,9 @@ var tabslideshow = {
                 break;
             case 'randomorder':
                 this.randomorder = this.prefs.getBoolPref('randomorder');
+                break;
+            case 'customtimes':
+                this.computeCustomTimes(this.prefs.getCharPref('customtimes'));
                 break;
         }
     },
@@ -209,10 +228,25 @@ var tabslideshow = {
 
         // set next tab
         gBrowser.selectedTab = nexttab;
+        
+        var del = this.delay;
+        try {
+            url = gBrowser.getBrowserForTab(gBrowser.selectedTab).currentURI.asciiHost;
+        }
+        catch(err) {
+            //TODO: Figure out how to deal with tabs that are not standard urls (ie about:addons)
+        }
+        for (var i = 0; i < this.customtimes.length; i++) {
+            if (this.customtimes[i][0].test(url)) {
+                del = this.customtimes[i][1];
+                break;
+            }
+        }
+        console.log(url);
 
         // sync timer delay to preference
-        if (this.timer.delay != this.delay*1000) {
-            this.timer.delay = this.delay*1000;
+        if (this.timer.delay != del*1000) {
+            this.timer.delay = del*1000;
         }
 
         // optionally refresh upcoming tab
