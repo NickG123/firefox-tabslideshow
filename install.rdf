@@ -14,7 +14,7 @@ Licensed under MPL (http://www.mozilla.org/MPL/MPL-1.1.html)
 
     <Description about="urn:mozilla:install-manifest">
 
-    <em:id>{16466865-007f-4ce4-aeb5-a0aa8b34c61a}</em:id>
+    <em:id>{23493a82-e257-48c4-b0de-52ae36189ceb}</em:id>
     <em:name>Tab Slideshow Plus</em:name>
     <em:version>5.1</em:version>
     <em:description>A fork of tabslideshow that adds some extra features</em:description>
