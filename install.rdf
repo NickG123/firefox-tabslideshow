@@ -4,7 +4,7 @@
 install.rdf
 
 Tab Slideshow Firefox extension
-emsearcy@gmail.com
+nick.g.123@hotmail.com
 
 Licensed under MPL (http://www.mozilla.org/MPL/MPL-1.1.html)
 -->
@@ -15,11 +15,11 @@ Licensed under MPL (http://www.mozilla.org/MPL/MPL-1.1.html)
     <Description about="urn:mozilla:install-manifest">
 
     <em:id>{16466865-007f-4ce4-aeb5-a0aa8b34c61a}</em:id>
-    <em:name>Tab Slideshow</em:name>
-    <em:version>5.0</em:version>
-    <em:description>Cycles through tabs like a slideshow.</em:description>
-    <em:creator>Eric Searcy</em:creator>
-    <em:homepageURL>http://emsearcy.org</em:homepageURL>
+    <em:name>Tab Slideshow Plus</em:name>
+    <em:version>5.1</em:version>
+    <em:description>A fork of tabslideshow that adds some extra features</em:description>
+    <em:homepageURL>https://github.com/NickG123/firefox-tabslideshow</em:homepageURL>
+    <em:creator>Nick Gerow</em:creator>
     <em:optionsURL>chrome://tabslideshow/content/settings.xul</em:optionsURL>
 
     <em:targetApplication>
